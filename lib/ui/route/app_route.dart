@@ -1,0 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:match_number/ui/pages/game.dart';
+import 'package:match_number/ui/pages/home.dart';
+import 'package:match_number/ui/pages/stats.dart';
+
+// ignore: avoid_classes_with_only_static_members
+class RouteCatalog {
+  static String stats = '/stats';
+  static String game = '/game';
+  static String home = '/';
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    final arguments = settings.arguments;
+    switch (settings.name) {
+      case '/game':
+        return MaterialPageRoute(builder: (_) => const Game());
+      case '/stats':
+        return MaterialPageRoute(builder: (_) => StatsPage(arguments as int?));
+      case '/':
+      default:
+        return MaterialPageRoute(builder: (_) => const HomePage());
+    }
+  }
+}
