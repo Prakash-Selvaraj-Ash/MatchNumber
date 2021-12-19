@@ -14,13 +14,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Match My Number',
-      themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
-          primarySwatch: Colors.grey,
+          backgroundColor: const Color(0xFF333536),
           textTheme: Theme.of(context)
               .textTheme
               .apply(bodyColor: Colors.white, fontSizeFactor: 1.4)),
       theme: ThemeData(
+          backgroundColor: Colors.white,
           textTheme: Theme.of(context)
               .textTheme
               .apply(bodyColor: Colors.white, fontSizeFactor: 1.4)),

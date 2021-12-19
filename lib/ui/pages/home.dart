@@ -54,12 +54,12 @@ class _HomePageState extends State<HomePage>
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              child: InkWell(
-                onTap: () => Navigator.pushNamed(context, RouteCatalog.game),
-                child: SlideTransition(
-                  position: _slideInTransition,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: InkWell(
+                  onTap: () => Navigator.pushNamed(context, RouteCatalog.game),
+                  child: SlideTransition(
+                    position: _slideInTransition,
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.deepOrange,
@@ -81,31 +81,73 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             Expanded(
-              child: InkWell(
-                onTap: () => Navigator.pushNamed(context, RouteCatalog.stats),
-                child: SlideTransition(
-                  position: _slideOutTransition,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.pink[600],
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.format_list_numbered,
-                              size: 60,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              'Champion Board',
-                              style: GoogleFonts.pressStart2p(),
-                            )
-                          ],
-                        )),
-                  ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        onTap: () =>
+                            Navigator.pushNamed(context, RouteCatalog.tuto),
+                        child: SlideTransition(
+                          position: _slideOutTransition,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.pink[600],
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      Icons.book,
+                                      size: 60,
+                                      color: Colors.white,
+                                    ),
+                                    Text(
+                                      'Tuto',
+                                      style: GoogleFonts.pressStart2p(),
+                                    )
+                                  ],
+                                )),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () =>
+                            Navigator.pushNamed(context, RouteCatalog.stats),
+                        child: SlideTransition(
+                          position: _slideOutTransition,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.pink[600],
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      Icons.format_list_numbered,
+                                      size: 60,
+                                      color: Colors.white,
+                                    ),
+                                    Text(
+                                      'Champion Board',
+                                      style: GoogleFonts.pressStart2p(),
+                                    )
+                                  ],
+                                )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             )

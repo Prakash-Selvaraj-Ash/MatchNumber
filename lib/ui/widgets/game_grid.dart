@@ -4,6 +4,8 @@ import 'package:match_number/models/number_model.dart';
 import 'package:match_number/ui/widgets/tile.dart';
 import 'package:match_number/viewmodel/game_view_model.dart';
 
+import 'adaptive_layout.dart';
+
 class GameGrid extends StatefulWidget {
   final GameViewModel _gameViewModel;
   const GameGrid({required GameViewModel gameViewModel})
@@ -50,29 +52,40 @@ class _GameGridState extends State<GameGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return Listener(
-      onPointerDown: _detectTapedItem,
-      onPointerMove: _detectMoveItem,
-      onPointerUp: _clearSelection,
-      child: GridView.builder(
-        key: key,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: widget._gameViewModel.numbers.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
-          crossAxisSpacing: 3.0,
-          mainAxisSpacing: 3.0,
+    return LayoutBuilder(builder: (context, constraints) {
+      return Listener(
+        onPointerDown: _detectTapedItem,
+        onPointerMove: _detectMoveItem,
+        onPointerUp: _clearSelection,
+        child: AdaptiveLayout(
+          mobile: buildGridTile(3 / 2.5),
+          tablet: buildGridTile(4 / 2.5),
+          desktop: buildGridTile(3),
         ),
-        itemBuilder: (context, index) {
-          final listenable = widget._gameViewModel.tileCommands[index];
-          return ValueListenableBuilder<NumberModel>(
-              valueListenable: listenable,
-              builder: (context, model, _) {
-                return Tile(number: model);
-              });
-        },
+      );
+    });
+  }
+
+  GridView buildGridTile(double aspectRatio) {
+    return GridView.builder(
+      key: key,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: widget._gameViewModel.numbers.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+        childAspectRatio: aspectRatio,
+        crossAxisSpacing: 3.0,
+        mainAxisSpacing: 3.0,
       ),
+      itemBuilder: (context, index) {
+        final listenable = widget._gameViewModel.tileCommands[index];
+        return ValueListenableBuilder<NumberModel>(
+            valueListenable: listenable,
+            builder: (context, model, _) {
+              return Tile(number: model);
+            });
+      },
     );
   }
 }

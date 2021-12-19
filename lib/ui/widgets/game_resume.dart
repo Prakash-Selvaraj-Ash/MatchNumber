@@ -47,7 +47,7 @@ class GameResume extends StatelessWidget {
                             width: 20,
                           ),
                           Text(
-                            'Resume Game',
+                            'Resume',
                             style: GoogleFonts.pressStart2p(),
                           )
                         ],
